@@ -107,7 +107,7 @@ $month_count = $stmt_month->fetchColumn();
                                 <p>When someone submits a contact form, it will show up here.</p>
                             </div>
                         <?php else: ?>
-                            <table>
+                            <table class="enquiries-table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -123,22 +123,24 @@ $month_count = $stmt_month->fetchColumn();
                                 <tbody>
                                     <?php foreach($enquiries as $enq): ?>
                                     <tr class="<?= $enq['status'] == 'unread' ? 'tr-unread' : '' ?>">
-                                        <td>#<?= $enq['id'] ?></td>
-                                        <td><?= date('d M Y, h:i A', strtotime($enq['created_at'])) ?></td>
-                                        <td><?= htmlspecialchars($enq['name']) ?></td>
-                                        <td><a href="mailto:<?= htmlspecialchars($enq['email']) ?>"><?= htmlspecialchars($enq['email']) ?></a></td>
-                                        <td><?= !empty($enq['phone']) ? '<a href="tel:'.htmlspecialchars($enq['phone']).'">'.htmlspecialchars($enq['phone']).'</a>' : 'N/A' ?></td>
-                                        <td><?= nl2br(htmlspecialchars($enq['message'] ?? '')) ?></td>
-                                        <td>
+                                        <td data-label="ID">#<?= $enq['id'] ?></td>
+                                        <td data-label="Date"><?= date('d M Y, h:i A', strtotime($enq['created_at'])) ?></td>
+                                        <td data-label="Name"><?= htmlspecialchars($enq['name']) ?></td>
+                                        <td data-label="Email"><a href="mailto:<?= htmlspecialchars($enq['email']) ?>"><?= htmlspecialchars($enq['email']) ?></a></td>
+                                        <td data-label="Phone"><?= !empty($enq['phone']) ? '<a href="tel:'.htmlspecialchars($enq['phone']).'">'.htmlspecialchars($enq['phone']).'</a>' : 'N/A' ?></td>
+                                        <td data-label="Message"><?= nl2br(htmlspecialchars($enq['message'] ?? '')) ?></td>
+                                        <td data-label="Status">
                                             <?php if($enq['status'] == 'unread'): ?>
                                                 <span class="status-badge status-unread">Unread</span>
                                             <?php else: ?>
                                                 <span class="status-badge status-read">Read</span>
                                             <?php endif; ?>
                                         </td>
-                                        <td>
+                                        <td data-label="Action">
                                             <?php if($enq['status'] == 'unread'): ?>
                                                 <a href="dashboard.php?mark_read=<?= $enq['id'] ?>" class="btn-sm">Mark as Read</a>
+                                            <?php else: ?>
+                                                <span style="color:#94a3b8;">—</span>
                                             <?php endif; ?>
                                         </td>
                                     </tr>
@@ -149,6 +151,7 @@ $month_count = $stmt_month->fetchColumn();
                     </div>
                 </div>
             </div>
+            <?php include 'includes/footer.php'; ?>
         </main>
     </div>
     

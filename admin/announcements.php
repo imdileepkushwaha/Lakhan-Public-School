@@ -367,6 +367,7 @@ $announcements = $stmt->fetchAll();
                     </div>
                 </div>
             </div>
+            <?php include 'includes/footer.php'; ?>
         </main>
     </div>
 

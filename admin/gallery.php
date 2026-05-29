@@ -137,6 +137,7 @@ $titles = $stmt->fetchAll();
                     <?php endif; ?>
                 </div>
             </div>
+            <?php include 'includes/footer.php'; ?>
         </main>
     </div>
 

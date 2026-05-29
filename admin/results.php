@@ -196,6 +196,7 @@ $results = $stmt->fetchAll();
                 </div>
 
             </div>
+            <?php include 'includes/footer.php'; ?>
         </main>
     </div>
 

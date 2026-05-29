@@ -193,6 +193,7 @@ $is_active = (get_setting('popup_active') == '1');
                     </div>
                 </div>
             </div>
+            <?php include 'includes/footer.php'; ?>
         </main>
     </div>
 

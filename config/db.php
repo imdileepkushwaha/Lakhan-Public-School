@@ -13,9 +13,9 @@ if ($is_local) {
     // Live Server Database Credentials (cPanel / Hosting)
     // UPDATE THESE WITH YOUR LIVE SERVER DETAILS
     $host = 'localhost'; 
-    $user = 'your_live_db_user'; 
-    $pass = 'your_live_db_pass'; 
-    $dbname = 'your_live_db_name'; 
+    $user = 'www_lakhanpublic2026'; 
+    $pass = 'lakhanpublic2026@223#'; 
+    $dbname = 'admin_lakhanpublic'; 
 }
 
 try {

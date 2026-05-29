@@ -41,7 +41,7 @@
 body {
     background-color: var(--admin-bg);
     color: var(--admin-text);
-    height: 100vh;
+    min-height: 100vh;
     /* display: flex;
     justify-content: center;
     align-items: center; */
@@ -60,6 +60,17 @@ body {
     background: linear-gradient(135deg, var(--admin-primary) 0%, #0a1930 100%);
 }
 
+@keyframes slideUpFade {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .login-card {
     background: rgba(255, 255, 255, 0.05);
     padding: 50px 40px;
@@ -71,6 +82,7 @@ body {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .login-card h2 {
@@ -884,6 +896,16 @@ tbody tr td:first-child {
             border-radius: 50%;
             animation-delay: -5s;
 }
+.shape-3 {
+    width: 350px; height: 350px;
+            background: #6f42c1;
+            top: 40%; left: 30%;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -2s;
+            filter: blur(90px);
+            opacity: 0.5;
+}
 
 .login-wrapper {
     position: relative;
@@ -895,24 +917,24 @@ tbody tr td:first-child {
 
 .logo-box {
     width: 80px; height: 80px;
-            background: #fff;
+            background: linear-gradient(135deg, #38bbf3, #067bad);
             border-radius: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0 auto 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(56, 187, 243, 0.4);
             transform: rotate(-5deg);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .login-card:hover .logo-box {
-    transform: rotate(0deg);
+    transform: rotate(0deg) scale(1.05);
 }
 
 .logo-box i {
     font-size: 2.5rem;
-            color: #00122e;
+            color: #fff;
 }
 
 .login-card p {
@@ -935,11 +957,13 @@ tbody tr td:first-child {
             color: rgba(255, 255, 255, 0.4);
             font-size: 1.1rem;
             transition: color 0.3s ease;
+            z-index: 2;
+            pointer-events: none;
 }
 
 .input-group input {
     width: 100%;
-            padding: 16px 20px 16px 50px;
+            padding: 22px 20px 10px 50px;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
@@ -949,17 +973,34 @@ tbody tr td:first-child {
             transition: all 0.3s ease;
 }
 
-.input-group input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+.input-group label {
+    position: absolute;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
 }
 
-.input-group input:focus {
+.input-group input:focus,
+.input-group input:not(:placeholder-shown) {
     background: rgba(255, 255, 255, 0.1);
             border-color: #38bbf3;
             box-shadow: 0 0 15px rgba(56, 187, 243, 0.2);
 }
 
-.input-group input:focus + i, .input-group input:valid + i {
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label {
+    top: 14px;
+            font-size: 0.75rem;
+            color: #38bbf3;
+            font-weight: 600;
+}
+
+.input-group input:focus ~ i,
+.input-group input:not(:placeholder-shown) ~ i {
     color: #38bbf3;
 }
 
@@ -978,11 +1019,25 @@ tbody tr td:first-child {
             letter-spacing: 1px;
             margin-top: 10px;
             box-shadow: 0 10px 20px rgba(6, 123, 173, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
 }
 
 .btn-login:hover {
     transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(6, 123, 173, 0.4);
+            box-shadow: 0 15px 30px rgba(56, 187, 243, 0.5);
+            background: linear-gradient(135deg, #4dc3f5, #078bc3);
+}
+
+.btn-login i {
+    font-size: 1.1rem;
+            transition: transform 0.3s ease;
+}
+
+.btn-login:hover i {
+    transform: translateX(5px);
 }
 
 .btn-login:active {
@@ -1593,3 +1648,13 @@ tbody tr td:first-child {
             }
         }
 
+
+/* =========================================
+   Login Page Specific Overrides
+   ========================================= */
+body.admin-login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}

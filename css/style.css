@@ -2680,3 +2680,101 @@ section > .container {
         font-size: 24px;
     }
 }
+
+/* =========================================
+   Preloader
+   ========================================= */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#preloader.preloader-hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.book-loader {
+    position: relative;
+    width: 80px;
+    height: 50px;
+    margin: 0 auto;
+    perspective: 300px;
+}
+.book-page {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 50px;
+    background: #fff;
+    border: 3px solid var(--primary);
+}
+.book-left-page {
+    left: 0;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+}
+.book-right-page {
+    right: 0;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+}
+.book-flipping-page {
+    right: 0;
+    transform-origin: left center;
+    border-left: none;
+    border-radius: 0 5px 5px 0;
+    background: var(--secondary);
+    animation: flipBook 1.5s infinite ease-in-out;
+}
+.book-flip-1 { animation-delay: 0s; }
+.book-flip-2 { animation-delay: 0.2s; }
+.book-flip-3 { animation-delay: 0.4s; }
+
+.loader-text {
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulseLoaderText 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes flipBook {
+    0% {
+        transform: rotateY(0deg);
+        z-index: 10;
+        background: var(--secondary);
+    }
+    50% {
+        background: #f8f9fa;
+    }
+    100% {
+        transform: rotateY(-180deg);
+        z-index: 1;
+        background: var(--primary);
+    }
+}
+
+@keyframes pulseLoaderText {
+    0% { opacity: 0.5; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1.02); }
+}

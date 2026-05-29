@@ -216,3 +216,16 @@ function reloadCaptcha(btn) {
             }, 500); // 500ms delay to make it feel smooth
         });
 }
+
+/* =========================================
+   Preloader Logic
+   ========================================= */
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloader.classList.add('preloader-hide');
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 600);
+    }
+});

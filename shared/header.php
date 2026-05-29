@@ -26,6 +26,19 @@
 </head>
 <body>
 
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="book-loader">
+                <div class="book-page book-left-page"></div>
+                <div class="book-page book-right-page"></div>
+                <div class="book-page book-flipping-page book-flip-1"></div>
+                <div class="book-page book-flipping-page book-flip-2"></div>
+                <div class="book-page book-flipping-page book-flip-3"></div>
+            </div>
+            <div class="loader-text">Loading LPS...</div>
+        </div>
+    </div>
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>

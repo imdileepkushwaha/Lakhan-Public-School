@@ -1,11 +1,7 @@
 <?php
-session_start();
+require_once 'includes/session_guard.php';
+admin_require_login();
 require_once '../config/db.php';
-
-if (!isset($_SESSION['admin_id'])) {
-    header("Location: login.php");
-    exit;
-}
 
 // Handle marking as read if requested
 if (isset($_GET['mark_read']) && is_numeric($_GET['mark_read'])) {

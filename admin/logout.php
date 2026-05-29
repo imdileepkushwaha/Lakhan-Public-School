@@ -1,7 +1,8 @@
 <?php
-session_start();
-session_unset();
-session_destroy();
-header("Location: login.php");
+require_once 'includes/session_guard.php';
+admin_destroy_session();
+
+$redirect = isset($_GET['expired']) ? 'login.php?expired=1' : 'login.php';
+header('Location: ' . $redirect);
 exit;
 ?>

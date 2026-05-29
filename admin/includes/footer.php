@@ -8,3 +8,4 @@
                     </div>
                 </div>
             </footer>
+            <?php include 'includes/session_timeout_script.php'; ?>

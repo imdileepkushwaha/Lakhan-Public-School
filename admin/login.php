@@ -1,6 +1,7 @@
 <?php
-session_start();
-if (isset($_SESSION['admin_id'])) {
+require_once 'includes/session_guard.php';
+
+if (admin_session_is_valid(false)) {
     header("Location: dashboard.php");
     exit;
 }
@@ -28,7 +29,11 @@ if (isset($_SESSION['admin_id'])) {
             <h2>LPS Admin</h2>
             <p>Sign in to manage your school</p>
             
-            <?php if (isset($_GET['error'])): ?>
+            <?php if (isset($_GET['expired'])): ?>
+                <div class="error-msg">
+                    <i class="fa-solid fa-clock"></i> Session expired after 10 minutes of inactivity. Please login again.
+                </div>
+            <?php elseif (isset($_GET['error'])): ?>
                 <div class="error-msg">
                     <i class="fa-solid fa-triangle-exclamation"></i> Invalid username or password
                 </div>

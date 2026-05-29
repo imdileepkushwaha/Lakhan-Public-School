@@ -1,11 +1,7 @@
 <?php
-session_start();
+require_once 'includes/session_guard.php';
+admin_require_login();
 require_once '../config/db.php';
-
-if (!isset($_SESSION['admin_id'])) {
-    header("Location: login.php");
-    exit;
-}
 
 // Handle image deletion
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {

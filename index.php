@@ -8,10 +8,14 @@ include 'shared/header.php';
         <!-- Background Slider -->
         <div class="swiper heroSwiper hero-bg-slider">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="images/main-slider/image-4.jpg" alt="Lakhan Public School" class="hero-img"></div>
-                <div class="swiper-slide"><img src="images/main-slider/image-1.jpg" alt="Lakhan Public School" class="hero-img"></div>
-                <div class="swiper-slide"><img src="images/main-slider/image-2.jpg" alt="Lakhan Public School" class="hero-img"></div>
-                <div class="swiper-slide"><img src="images/main-slider/image-3.jpg" alt="Lakhan Public School" class="hero-img"></div>
+                <?php
+                $hero_slides = get_hero_slides();
+                foreach ($hero_slides as $slide_image):
+                ?>
+                <div class="swiper-slide">
+                    <img src="images/main-slider/<?= htmlspecialchars($slide_image) ?>" alt="Lakhan Public School" class="hero-img">
+                </div>
+                <?php endforeach; ?>
             </div>
             
             <!-- Navigation Arrows -->
@@ -114,80 +118,27 @@ include 'shared/header.php';
     </section>
 
     <!-- Features Section -->
+    <?php $features_data = get_salient_features_data(); ?>
     <section id="features" class="features-redesign section-padding bg-white">
         <div class="container">
             <div class="section-header reveal header-center">
-                <div class="section-badge badge-center">Why Choose Us</div>
-                <h2 class="section-title">Salient Features</h2>
-                <p class="section-desc mt-3">Every child has to follow all the disciplinary rules of the institution to maintain the school decorum.</p>
+                <div class="section-badge badge-center"><?= htmlspecialchars($features_data['badge']) ?></div>
+                <h2 class="section-title"><?= htmlspecialchars($features_data['title']) ?></h2>
+                <p class="section-desc mt-3"><?= htmlspecialchars($features_data['description']) ?></p>
             </div>
             
             <div class="features-list-grid">
-                <!-- Feature 1 -->
-                <div class="feature-item reveal">
-                    <div class="f-icon">
-                        <i class="fa-solid fa-face-smile"></i>
+                <?php foreach ($features_data['items'] as $index => $feature): ?>
+                <div class="feature-item reveal"<?= $index > 0 ? ' style="transition-delay: ' . ($index * 0.1) . 's;"' : '' ?>>
+                    <div class="f-icon<?= ($feature['accent'] ?? '') === 'sports' ? ' f-icon-sports' : '' ?>">
+                        <i class="<?= htmlspecialchars(sanitize_feature_icon($feature['icon'] ?? 'fa-solid fa-star')) ?>"></i>
                     </div>
                     <div class="f-content">
-                        <h3>Expert Teachers</h3>
-                        <p>We have a team of child education professionals, each with more than a decade of experience.</p>
+                        <h3><?= htmlspecialchars($feature['title']) ?></h3>
+                        <p><?= htmlspecialchars($feature['description']) ?></p>
                     </div>
                 </div>
-
-                <!-- Feature 2 -->
-                <div class="feature-item reveal" style="transition-delay: 0.1s;">
-                    <div class="f-icon">
-                        <i class="fa-solid fa-calculator"></i>
-                    </div>
-                    <div class="f-content">
-                        <h3>Active Learning</h3>
-                        <p>If you want your child to catch up or get ahead, give Luckhan Public Highschool a call!</p>
-                    </div>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="feature-item reveal" style="transition-delay: 0.2s;">
-                    <div class="f-icon">
-                        <i class="fa-solid fa-language"></i>
-                    </div>
-                    <div class="f-content">
-                        <h3>English Medium</h3>
-                        <p>English is the primary language of communication on campus, with special focus on speaking skills.</p>
-                    </div>
-                </div>
-
-                <!-- Feature 4 -->
-                <div class="feature-item reveal" style="transition-delay: 0.3s;">
-                    <div class="f-icon">
-                        <i class="fa-solid fa-dumbbell"></i>
-                    </div>
-                    <div class="f-content">
-                        <h3>Fullday Programs</h3>
-                        <p>To provide a high-quality education that prepares all students to achieve their full potential</p>
-                    </div>
-                </div>
-
-                <!-- Feature 5 -->
-                <div class="feature-item reveal" style="transition-delay: 0.4s;">
-                    <div class="f-icon">
-                        <i class="fa-solid fa-seedling"></i>
-                    </div>
-                    <div class="f-content">
-                        <h3>Clear Approach</h3>
-                        <p>All children can reach their learning potential and they can achieve everything.</p>
-                    </div>
-                </div>
-
-                <!-- Feature 6 -->
-                <div class="feature-item reveal" style="transition-delay: 0.5s;">
-                    <div class="f-icon">
-                        <i class="fa-solid fa-hands-holding-child"></i>
-                    </div>
-                    <div class="f-content">
-                        <h3>Social Upliftment</h3>
-                        <p>We focus on upliftment of marginalized and less privileged students.</p>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
@@ -243,34 +194,25 @@ include 'shared/header.php';
     </section>
 
     <!-- General Rules Section -->
+    <?php $general_rules = get_general_rules_data(); ?>
     <section id="rules" class="features bg-white">
         <div class="container">
             <div class="section-header reveal">
-                <div class="section-badge">Guidelines</div>
-                <h2 class="section-title">General Rules</h2>
+                <div class="section-badge"><?= htmlspecialchars($general_rules['badge']) ?></div>
+                <h2 class="section-title"><?= htmlspecialchars($general_rules['title']) ?></h2>
+                <?php if (!empty($general_rules['description'])): ?>
+                <p class="section-desc mt-3"><?= htmlspecialchars($general_rules['description']) ?></p>
+                <?php endif; ?>
             </div>
             
             <div class="features-grid">
-                <div class="feature-card glass-panel reveal">
-                    <div class="feature-icon icon-blue"><i class="fa-solid fa-clock"></i></div>
-                    <h3>Punctuality</h3>
-                    <p>Punctual and regular attendance is strictly insisted upon. Students must arrive at school before the morning assembly.</p>
+                <?php foreach ($general_rules['items'] as $index => $rule): ?>
+                <div class="feature-card glass-panel reveal"<?= $index > 0 ? ' style="transition-delay: ' . ($index * 0.1) . 's;"' : '' ?>>
+                    <div class="feature-icon icon-blue"><i class="<?= htmlspecialchars(sanitize_feature_icon($rule['icon'] ?? 'fa-solid fa-star')) ?>"></i></div>
+                    <h3><?= htmlspecialchars($rule['title']) ?></h3>
+                    <p><?= htmlspecialchars($rule['description']) ?></p>
                 </div>
-                <div class="feature-card glass-panel reveal" style="transition-delay: 0.1s;">
-                    <div class="feature-icon icon-blue"><i class="fa-solid fa-shirt"></i></div>
-                    <h3>Uniform Code</h3>
-                    <p>Students must wear the prescribed clean and neat school uniform daily. Strict action will be taken for non-compliance.</p>
-                </div>
-                <div class="feature-card glass-panel reveal" style="transition-delay: 0.2s;">
-                    <div class="feature-icon icon-blue"><i class="fa-solid fa-scale-balanced"></i></div>
-                    <h3>Discipline</h3>
-                    <p>Every student must possess willingness to comply with school rules and maintain decorum within the campus.</p>
-                </div>
-                <div class="feature-card glass-panel reveal" style="transition-delay: 0.3s;">
-                    <div class="feature-icon icon-blue"><i class="fa-solid fa-book-open"></i></div>
-                    <h3>Assignments</h3>
-                    <p>Earnestness in home assignments and projects is required. Parents must monitor their child's daily progress.</p>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>

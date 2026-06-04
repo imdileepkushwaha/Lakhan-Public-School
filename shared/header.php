@@ -80,13 +80,15 @@
             <div class="mobile-menu-overlay"></div>
             <div class="container nav-container">
                 <div class="logo">
-                    <img src="images/logo-small.png" alt="Lakhan Public School Logo" class="logo-img">
+                    <a href="index.php">
+                        <img src="<?= htmlspecialchars(get_site_logo_url()) ?>" alt="Lakhan Public School Logo" class="logo-img">
+                    </a>
                 </div>
                 
                 <?php $current_page = basename($_SERVER['PHP_SELF']); ?>
                 <ul class="nav-links">
                     <div class="mobile-menu-header">
-                        <img src="images/logo-small.png" alt="Lakhan Public School">
+                        <img src="<?= htmlspecialchars(get_site_logo_url()) ?>" alt="Lakhan Public School">
                         <div class="mobile-close-btn"><i class="fa-solid fa-xmark"></i></div>
                     </div>
                     

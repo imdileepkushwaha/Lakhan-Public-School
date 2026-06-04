@@ -37,17 +37,29 @@ try {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
 
-    // Insert default admin
+    $pdo->exec("CREATE TABLE IF NOT EXISTS hero_slides (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        image_filename VARCHAR(255) NOT NULL,
+        sort_order INT DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    // Insert or reset default admin (password: admin123)
     $username = 'admin';
     $password = password_hash('admin123', PASSWORD_DEFAULT);
-    
-    // Check if admin exists
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM admin_users WHERE username = ?");
+
+    $stmt = $pdo->prepare("SELECT id FROM admin_users WHERE username = ?");
     $stmt->execute([$username]);
-    if ($stmt->fetchColumn() == 0) {
+    $existing = $stmt->fetchColumn();
+
+    if ($existing) {
+        $stmt = $pdo->prepare("UPDATE admin_users SET password = ? WHERE username = ?");
+        $stmt->execute([$password, $username]);
+        echo "Admin password reset to: admin123\n";
+    } else {
         $stmt = $pdo->prepare("INSERT INTO admin_users (username, password) VALUES (?, ?)");
         $stmt->execute([$username, $password]);
-        echo "Default admin created successfully.\n";
+        echo "Default admin created (admin / admin123).\n";
     }
 
     echo "Database setup complete.\n";

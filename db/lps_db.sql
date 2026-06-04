@@ -39,7 +39,7 @@ CREATE TABLE `admin_users` (
 --
 
 INSERT INTO `admin_users` (`id`, `username`, `password`, `created_at`) VALUES
-(1, 'admin', '$2y$10$pKrfFu0hKkQFYCeRPwoNfOExllkRQNyHvVJvo/pg8fmf9YCHBTLBe', '2026-05-28 19:26:57');
+(1, 'admin', '$2y$10$G8CclXdIE20YllggPR3EH.zI39tla5sLkrbLpqcudf6N6Nbgpx6CO', '2026-05-28 19:26:57');
 
 -- --------------------------------------------------------
 
@@ -113,6 +113,19 @@ INSERT INTO `gallery` (`id`, `title`, `image_filename`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hero_slides`
+--
+
+CREATE TABLE `hero_slides` (
+  `id` int(11) NOT NULL,
+  `image_filename` varchar(255) NOT NULL,
+  `sort_order` int(11) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `site_settings`
 --
 
@@ -133,6 +146,9 @@ INSERT INTO `site_settings` (`setting_key`, `setting_value`) VALUES
 ('contact_phone2', '(+91) 8090 2963 62'),
 ('popup_active', '0'),
 ('popup_image', ''),
+('site_logo', ''),
+('salient_features', ''),
+('general_rules', ''),
 ('social_facebook', 'index.php'),
 ('social_instagram', 'index.php'),
 ('social_twitter', 'index.php'),
@@ -192,6 +208,12 @@ ALTER TABLE `gallery`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `hero_slides`
+--
+ALTER TABLE `hero_slides`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `site_settings`
 --
 ALTER TABLE `site_settings`
@@ -230,6 +252,12 @@ ALTER TABLE `enquiries`
 --
 ALTER TABLE `gallery`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `hero_slides`
+--
+ALTER TABLE `hero_slides`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `student_results`

@@ -1385,6 +1385,10 @@ section {
     color: #38bbf3;
     font-size: 1.5rem;
 }
+.feature-item .f-icon-sports {
+    background: rgba(216, 27, 96, 0.12);
+    color: #D81B60;
+}
 .feature-item .f-content h3 {
     font-size: 1.3rem;
     margin-bottom: 10px;
@@ -1738,11 +1742,28 @@ section {
     gap: 15px;
     margin-bottom: 20px;
 }
-.footer-logo-wrapper img {
-    height: 60px;
-    background: #fff;
+
+.footer-logo-link {
+    display: inline-flex;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.footer-logo-wrapper img,
+.footer-logo-wrapper .footer-logo {
+    height: auto;
+    width: 300px;
+    /* max-width: 90px;
+    object-fit: contain; */
+    display: block;
+    /* background: #fff;
     border-radius: 50%;
-    padding: 5px;
+    padding: 6px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); */
+}
+
+.footer-logo {
+    filter: none;
 }
 .brand-text {
     color: #fff;

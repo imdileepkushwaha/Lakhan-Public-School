@@ -18,12 +18,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
     $upload_dir = '../images/gallery/';
+    $min_size = 500 * 1024;
+    $max_size = 2 * 1024 * 1024;
+
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0755, true);
     }
 
     $success_count = 0;
     $error_occurred = false;
+    $size_error = false;
 
     // Loop through each uploaded file
     $file_count = count($_FILES['image']['name']);
@@ -44,9 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             continue;
         }
         
-        // Max file size: 500KB
-        if ($file_size > 500 * 1024) {
+        if ($file_size < $min_size || $file_size > $max_size) {
             $error_occurred = true;
+            $size_error = true;
             continue;
         }
         
@@ -69,6 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($success_count > 0) {
         header("Location: gallery.php?success=1");
+    } elseif ($size_error) {
+        header("Location: gallery.php?error=size");
     } else {
         header("Location: gallery.php?error=1");
     }

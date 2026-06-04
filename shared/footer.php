@@ -6,8 +6,10 @@
                 <!-- Column 1: Brand -->
                 <div class="footer-widget brand-widget">
                     <div class="footer-logo-wrapper">
-                        <img src="https://lakhanpublicschool.com/images/gallery/logomain.png" alt="Lakhan Public School Logo">
-                        <h3 class="brand-text">Lakhan Public <span>School</span></h3>
+                        <a href="index.php" class="footer-logo-link" aria-label="Lakhan Public School Home">
+                            <img src="<?= htmlspecialchars(get_site_logo_url()) ?>" alt="Lakhan Public School Logo" class="footer-logo">
+                        </a>
+                        <!-- <h3 class="brand-text">Lakhan Public <span>School</span></h3> -->
                     </div>
                     <p class="brand-desc">Providing high-quality education that prepares all students to achieve their full potential and become the leaders of tomorrow.</p>
                     <div class="footer-socials">
